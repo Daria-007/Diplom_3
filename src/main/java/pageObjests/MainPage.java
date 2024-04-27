@@ -1,7 +1,12 @@
 package pageObjests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class MainPage {
     private static final String PAGE_URL = "https://stellarburgers.nomoreparties.site/";
@@ -12,6 +17,8 @@ public class MainPage {
     public static final String CAUSE = ".//span[@class = 'text text_type_main-default' and text() = 'Соусы']";
     public static final String FILLINGS = ".//span[@class = 'text text_type_main-default' and text() = 'Начинки']";
     public static final String UNLOGIN_BUTTON = ".//button[@class = 'Account_button__14Yp3 text text_type_main-medium text_color_inactive']";
+    public static final String BUILD_BURGER_TEXT = ".//h1[@class = 'text text_type_main-large mb-5 mt-10']";
+    public static final String LOGIN_BUTTON = ".//button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']";
     private WebDriver driver;
 
     public MainPage(WebDriver driver) {
@@ -19,6 +26,9 @@ public class MainPage {
     }
     public void openPage() {
         driver.get(PAGE_URL);
+    }
+    public void openLoginPage(){
+        driver.findElement(By.xpath(LOGIN_BUTTON)).click();
     }
     public void openPersonalArea() {
         driver.findElement(By.xpath(PERSONAL_AREA)).click();
@@ -40,5 +50,13 @@ public class MainPage {
     }
     public void unLogin() {
         driver.findElement(By.xpath(UNLOGIN_BUTTON)).click();
+    }
+    public boolean BuilsBurgerDispayed() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(BUILD_BURGER_TEXT))).isDisplayed();
+        } catch (NoSuchElementException | TimeoutException e) {
+            return false;
+        }
     }
 }

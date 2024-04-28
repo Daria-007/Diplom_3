@@ -60,10 +60,9 @@ public class MainPageTest {
         mainPage.openPersonalArea();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOGIN_BUTTON)));
-
+        mainPage.unLogin();
         WebDriverWait wait1 = new WebDriverWait(driver, 10);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath(ENTRANCY_TEXT)));
-        mainPage.unLogin();
         Assert.assertTrue("Unlogin successful", loginPage.personalAreaIsDispayed());
     }
     @Test

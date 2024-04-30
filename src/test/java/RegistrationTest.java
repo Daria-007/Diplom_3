@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,6 +21,7 @@ public class RegistrationTest {
     public void tearDown() {
         driver.quit();
     }
+    @Step("Test successful registration")
     @Test
     public void testSuccessfulRegistration() {
         MainPage mainPage = new MainPage(driver);
@@ -37,6 +39,7 @@ public class RegistrationTest {
         loginPage.personalAreaIsDispayed();
         Assert.assertTrue("Регистрация прошла успешно", loginPage.personalAreaIsDispayed());
     }
+    @Step("Test invalid password error")
     @Test
     public void testInvalidPasswordError() {
         MainPage mainPage = new MainPage(driver);

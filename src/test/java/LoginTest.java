@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import pageObjests.RegistrationPage;
+
+
 
 public class LoginTest {
     private WebDriver driver;
@@ -19,6 +22,7 @@ public class LoginTest {
     public void tearDown() {
         driver.quit();
     }
+    @Step("Test login from personal area")
     @Test
     public void testLoginFromPersonalArea() {
         MainPage mainPage = new MainPage(driver);
@@ -30,8 +34,9 @@ public class LoginTest {
         loginPage.inputPassword("Ermolaeva-007");
         loginPage.clickLoginButton();
 
-        Assert.assertTrue("Login successful", mainPage.BuilsBurgerDispayed());
+        Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
     }
+    @Step("Test login from main page")
     @Test
     public void testLoginFromMainPage() {
         MainPage mainPage = new MainPage(driver);
@@ -43,8 +48,9 @@ public class LoginTest {
         loginPage.inputPassword("Ermolaeva-007");
         loginPage.clickLoginButton();
 
-        Assert.assertTrue("Login successful", mainPage.BuilsBurgerDispayed());
+        Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
     }
+    @Step("Test login from registration form")
     @Test
     public void testLoginFromRegistrationForm() {
         MainPage mainPage = new MainPage(driver);
@@ -59,8 +65,9 @@ public class LoginTest {
         loginPage.inputPassword("Ermolaeva-007");
         loginPage.clickLoginButton();
 
-        Assert.assertTrue("Login successful", mainPage.BuilsBurgerDispayed());
+        Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
     }
+    @Step("Test login from password recovery form")
     @Test
     public void testLoginFromPasswordRecoveryForm() {
         MainPage mainPage = new MainPage(driver);
@@ -75,6 +82,6 @@ public class LoginTest {
         loginPage.inputPassword("Ermolaeva-007");
         loginPage.clickLoginButton();
 
-        Assert.assertTrue("Login successful", mainPage.BuilsBurgerDispayed());
+        Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
     }
 }

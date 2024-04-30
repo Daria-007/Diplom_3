@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,8 +14,8 @@ import static pageObjests.LoginPage.ENTRANCY_TEXT;
 import static pageObjests.MainPage.UNLOGIN_BUTTON;
 
 public class MainPageTest {
-    private WebDriver driver;
     private MainPage mainPage;
+    private WebDriver driver;
     @Before
     public void setUp() {
         driver = new ChromeDriver();
@@ -25,6 +26,7 @@ public class MainPageTest {
     public void tearDown() {
         driver.quit();
     }
+    @Step("Test personal area navigation")
     @Test
     public void testPersonalAreaNavigation() {
         LoginPage loginPage = new LoginPage(driver);
@@ -32,20 +34,23 @@ public class MainPageTest {
         mainPage.openPersonalArea();
        Assert.assertTrue("Open successful", loginPage.personalAreaIsDispayed());
     }
+    @Step("Test constructor navigation")
     @Test
     public void testConstructorNavigation() {
         mainPage.openPage();
         mainPage.openPersonalArea();
         mainPage.openConstructor();
-       Assert.assertTrue("Open successful", mainPage.BuilsBurgerDispayed());
+       Assert.assertTrue("Open successful", mainPage.isBuildBurgerDisplayed());
     }
+    @Step("Test Stellar Burgers navigation")
     @Test
     public void testStellarBurgersNavigation() {
         mainPage.openPage();
         mainPage.openPersonalArea();
         mainPage.clickStellarBurger();
-        Assert.assertTrue("Open successful", mainPage.BuilsBurgerDispayed());
+        Assert.assertTrue("Open successful", mainPage.isBuildBurgerDisplayed());
     }
+    @Step("Test logout")
     @Test
     public void testLogout() {
         LoginPage loginPage = new LoginPage(driver);
@@ -55,7 +60,7 @@ public class MainPageTest {
         loginPage.inputEmail("ermolaeva.daria@bk.ru");
         loginPage.inputPassword("Ermolaeva-007");
         loginPage.clickLoginButton();
-        Assert.assertTrue("Login successful", mainPage.BuilsBurgerDispayed());
+        Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
 
         mainPage.openPersonalArea();
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -65,17 +70,18 @@ public class MainPageTest {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath(ENTRANCY_TEXT)));
         Assert.assertTrue("Unlogin successful", loginPage.personalAreaIsDispayed());
     }
+    @Step("Test sections navigation")
     @Test
     public void testSectionsNavigation() {
         mainPage.openPage();
         mainPage.openConstructor();
-        mainPage.clickCause();
-        Assert.assertTrue("Navigation successful", mainPage.sauseTextIsDisplayed());
+        mainPage.clickSauce();
+        Assert.assertTrue("Navigation successful", mainPage.isSauceTextDisplayed());
 
         mainPage.clickBuns();
-        Assert.assertTrue("Navigation successful", mainPage.bunsTextIsDisplayed());
+        Assert.assertTrue("Navigation successful", mainPage.isBunsTextDisplayed());
 
-        mainPage.clickFilling();
-        Assert.assertTrue("Navigation successful", mainPage.fillingsTextIsDisplayed());
+        mainPage.clickFillings();
+        Assert.assertTrue("Navigation successful", mainPage.isFillingsTextDisplayed());
     }
 }

@@ -9,8 +9,11 @@ import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import pageObjests.RegistrationPage;
 
+import javax.inject.Inject;
+
 
 public class RegistrationTest {
+    @Inject
     private WebDriver driver;
     @Before
     public void setUp() {

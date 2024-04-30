@@ -10,11 +10,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import javax.inject.Inject;
+
 import static pageObjests.LoginPage.ENTRANCY_TEXT;
 import static pageObjests.MainPage.UNLOGIN_BUTTON;
 
 public class MainPageTest {
     private MainPage mainPage;
+    @Inject
     private WebDriver driver;
     @Before
     public void setUp() {

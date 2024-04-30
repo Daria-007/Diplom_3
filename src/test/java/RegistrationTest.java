@@ -13,10 +13,10 @@ import javax.inject.Inject;
 
 
 public class RegistrationTest {
-    @Inject
     private WebDriver driver;
     @Before
     public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/yandexdriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }

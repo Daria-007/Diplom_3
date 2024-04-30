@@ -10,21 +10,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import javax.inject.Inject;
-
 import static pageObjests.LoginPage.ENTRANCY_TEXT;
 import static pageObjests.MainPage.UNLOGIN_BUTTON;
 
 public class MainPageTest {
     private MainPage mainPage;
-    @Inject
     private WebDriver driver;
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = getWebDriver(false);
         driver.manage().window().maximize();
-        mainPage = new MainPage(driver);
+    }
+    ChromeDriver getWebDriver(boolean useYandexBrowser){
+        if (useYandexBrowser) {
+            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/yandexdriver");
+        } else {
+            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver");
+        }
+        return new ChromeDriver();
     }
     @After
     public void tearDown() {

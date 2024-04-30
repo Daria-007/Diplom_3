@@ -9,16 +9,20 @@ import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import pageObjests.RegistrationPage;
 
-import javax.inject.Inject;
-
-
 public class LoginTest {
-    @Inject
     private WebDriver driver;
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = getWebDriver(false);
         driver.manage().window().maximize();
+    }
+    ChromeDriver getWebDriver(boolean useYandexBrowser){
+        if (useYandexBrowser) {
+            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/yandexdriver");
+        } else {
+            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver");
+        }
+        return new ChromeDriver();
     }
     @After
     public void tearDown() {

@@ -13,7 +13,7 @@ public class RegistrationTest {
     private WebDriver driver;
     @Before
     public void setUp() {
-        driver = getWebDriver(false);
+        driver = getWebDriver(true);
         driver.manage().window().maximize();
     }
     ChromeDriver getWebDriver(boolean useYandexBrowser){

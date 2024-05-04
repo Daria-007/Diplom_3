@@ -1,16 +1,14 @@
 import io.qameta.allure.Step;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pageObjests.LoginPage;
-import pageObjests.MainPage;
-import pageObjests.RegistrationPage;
+import pageObjests.*;
+import static org.hamcrest.CoreMatchers.equalTo;
 
-public class LoginTest {
+public class LoginTest extends BaseTest {
     private WebDriver driver;
+    private static pageObjects.BurgerServiceUser burgerServiceUser;
+    private static User testUser;
     @Before
     public void setUp() {
         driver = getWebDriver(false);
@@ -24,9 +22,23 @@ public class LoginTest {
         }
         return new ChromeDriver();
     }
+
+    @BeforeClass
+    public static void setUp2() {
+        burgerServiceUser = new BurgerServiceUserImpl(REQUEST_SPECIFICATION, RESPONSE_SPECIFICATION);
+        testUser = User.create("test101@yandex.ru", "password", "Username");
+        burgerServiceUser.createUser(testUser)
+                .statusCode(200)
+                .body("success", equalTo(true));
+    }
     @After
     public void tearDown() {
         driver.quit();
+    }
+    public void cleanUp() {
+        if (testUser != null) {
+            burgerServiceUser.deleteUser(testUser);
+        }
     }
     @Step("Test login from personal area")
     @Test
@@ -36,8 +48,8 @@ public class LoginTest {
 
         mainPage.openPage();
         mainPage.openPersonalArea();
-        loginPage.inputEmail("ermolaeva.daria@bk.ru");
-        loginPage.inputPassword("Ermolaeva-007");
+        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
         Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
@@ -50,8 +62,8 @@ public class LoginTest {
 
         mainPage.openPage();
         mainPage.openLoginPage();
-        loginPage.inputEmail("ermolaeva.daria@bk.ru");
-        loginPage.inputPassword("Ermolaeva-007");
+        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
         Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
@@ -67,8 +79,8 @@ public class LoginTest {
         mainPage.openLoginPage();
         loginPage.openRegistration();
         registrationPage.openLoginPage();
-        loginPage.inputEmail("ermolaeva.daria@bk.ru");
-        loginPage.inputPassword("Ermolaeva-007");
+        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
         Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());
@@ -84,8 +96,8 @@ public class LoginTest {
         mainPage.openLoginPage();
         loginPage.openPasswordRecoveryForm();
         registrationPage.openLoginPage();
-        loginPage.inputEmail("ermolaeva.daria@bk.ru");
-        loginPage.inputPassword("Ermolaeva-007");
+        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
         Assert.assertTrue("Login successful", mainPage.isBuildBurgerDisplayed());

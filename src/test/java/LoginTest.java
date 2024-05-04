@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
     @BeforeClass
     public static void setUp2() {
         burgerServiceUser = new BurgerServiceUserImpl(REQUEST_SPECIFICATION, RESPONSE_SPECIFICATION);
-        testUser = User.create("test101@yandex.ru", "password", "Username");
+        testUser = User.create("test103@yandex.ru", "password", "Username");
         burgerServiceUser.createUser(testUser)
                 .statusCode(200)
                 .body("success", equalTo(true));
@@ -48,7 +48,7 @@ public class LoginTest extends BaseTest {
 
         mainPage.openPage();
         mainPage.openPersonalArea();
-        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputEmail("test103@yandex.ru");
         loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
@@ -62,7 +62,7 @@ public class LoginTest extends BaseTest {
 
         mainPage.openPage();
         mainPage.openLoginPage();
-        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputEmail("test103@yandex.ru");
         loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
@@ -79,7 +79,7 @@ public class LoginTest extends BaseTest {
         mainPage.openLoginPage();
         loginPage.openRegistration();
         registrationPage.openLoginPage();
-        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputEmail("test103@yandex.ru");
         loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 
@@ -96,7 +96,7 @@ public class LoginTest extends BaseTest {
         mainPage.openLoginPage();
         loginPage.openPasswordRecoveryForm();
         registrationPage.openLoginPage();
-        loginPage.inputEmail("test101@yandex.ru");
+        loginPage.inputEmail("test103@yandex.ru");
         loginPage.inputPassword("password");
         loginPage.clickLoginButton();
 

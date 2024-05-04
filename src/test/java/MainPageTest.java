@@ -14,11 +14,12 @@ import static pageObjests.LoginPage.ENTRANCY_TEXT;
 import static pageObjests.MainPage.UNLOGIN_BUTTON;
 
 public class MainPageTest {
-    private MainPage mainPage;
     private WebDriver driver;
+    private MainPage mainPage;
     @Before
     public void setUp() {
-        driver = getWebDriver(false);
+        driver = getWebDriver(false); // Используйте getWebDriver для получения экземпляра ChromeDriver
+        mainPage = new MainPage(driver);
         driver.manage().window().maximize();
     }
     ChromeDriver getWebDriver(boolean useYandexBrowser){

@@ -1,7 +1,7 @@
+import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjests.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -11,22 +11,14 @@ public class LoginTest extends BaseTest {
     private static User testUser;
     @Before
     public void setUp() {
-        driver = getWebDriver(false);
+        driver = WebDriverFactory.getWebDriver(false, "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver", "/Users/daria/WebDriver/yandexdriver");
         driver.manage().window().maximize();
-    }
-    ChromeDriver getWebDriver(boolean useYandexBrowser){
-        if (useYandexBrowser) {
-            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/yandexdriver");
-        } else {
-            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver");
-        }
-        return new ChromeDriver();
     }
 
     @BeforeClass
-    public static void setUp2() {
+    public static void setUpClass() {
         burgerServiceUser = new BurgerServiceUserImpl(REQUEST_SPECIFICATION, RESPONSE_SPECIFICATION);
-        testUser = User.create("test103@yandex.ru", "password", "Username");
+        testUser = User.create(Faker.instance().internet().emailAddress(), "password", Faker.instance().name().username());
         burgerServiceUser.createUser(testUser)
                 .statusCode(200)
                 .body("success", equalTo(true));

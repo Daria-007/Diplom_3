@@ -4,25 +4,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import pageObjests.RegistrationPage;
+import pageObjests.WebDriverFactory;
 
 public class RegistrationTest {
     private WebDriver driver;
     @Before
     public void setUp() {
-        driver = getWebDriver(true);
+        driver = WebDriverFactory.getWebDriver(false, "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver", "/Users/daria/WebDriver/yandexdriver");
         driver.manage().window().maximize();
-    }
-    ChromeDriver getWebDriver(boolean useYandexBrowser){
-        if (useYandexBrowser) {
-            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/yandexdriver");
-        } else {
-            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver");
-        }
-        return new ChromeDriver();
     }
     @After
     public void tearDown() {

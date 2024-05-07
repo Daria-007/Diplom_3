@@ -5,11 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjests.LoginPage;
 import pageObjests.MainPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pageObjests.WebDriverFactory;
+
 import static pageObjests.LoginPage.ENTRANCY_TEXT;
 import static pageObjests.MainPage.UNLOGIN_BUTTON;
 
@@ -18,17 +19,9 @@ public class MainPageTest {
     private MainPage mainPage;
     @Before
     public void setUp() {
-        driver = getWebDriver(false); // Используйте getWebDriver для получения экземпляра ChromeDriver
+        driver = WebDriverFactory.getWebDriver(false, "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver", "/Users/daria/WebDriver/yandexdriver");
         mainPage = new MainPage(driver);
         driver.manage().window().maximize();
-    }
-    ChromeDriver getWebDriver(boolean useYandexBrowser){
-        if (useYandexBrowser) {
-            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/yandexdriver");
-        } else {
-            System.setProperty("webdriver.chrome.driver", "/Users/daria/WebDriver/bin/chromedriver-mac-x64/chromedriver");
-        }
-        return new ChromeDriver();
     }
     @After
     public void tearDown() {

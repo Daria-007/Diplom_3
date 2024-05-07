@@ -1,0 +1,6 @@
+pageObjests/LoginPage.class
+pageObjests/BurgerServiceUserImpl.class
+pageObjests/User.class
+pageObjests/RegistrationPage.class
+pageObjests/MainPage.class
+pageObjects/BurgerServiceUser.class
